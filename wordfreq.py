@@ -74,11 +74,3 @@ def countWords(list, stopwords):
             dict[word] = 1
             
     return dict
-
-
-def printTopMost(dict,n):
-    if len(dict) < n:
-        n = len(dict)
-    sorted_dict = sorted(dict.items(),key=lambda item:item[1],reverse=True) #converts the dict to a list of tuples and sorts it
-    for i in range(n): #makes it so only the top 20 words for example is printed
-        print(f"{sorted_dict[i][0]:<20}{sorted_dict[i][1]:>5}") #prints the word with the correct amount of spaces so it looks clean

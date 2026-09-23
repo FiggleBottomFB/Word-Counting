@@ -1,21 +1,28 @@
-# test_dict = {"apple":3, "banana":7, "pear":2}
-# def topmost(dict, n):
-#     sorted_dict = sorted(dict.items(),key=lambda item:item[1],reverse=True)
-#     for i in range(n):
-#         pass
-#     print(sorted_dict) 
-# topmost(test_dict)
+import sys
+import wordfreq
 
 def printTopMost(dict,n):
-    sorted_dict = sorted(dict.items(),key=lambda item:item[1],reverse=True) 
-    for i in range(n):
-        #len1 = len(str(sorted_dict[i][0]))
-        #len2 = len(str(sorted_dict[i][1]))
-        #amount_of_spaces = 30-len1-len2
-        #print(f'{sorted_dict[i][0]}{" "*amount_of_spaces}{sorted_dict[i][1]}')
-        print(f"{sorted_dict[i][0]:<20}{sorted_dict[i][1]:>20}")
+    if len(dict) < n:
+        n = len(dict)
+    sorted_dict = sorted(dict.items(),key=lambda item:item[1],reverse=True) #converts the dict to a list of tuples and sorts it
+    for i in range(n): #makes it so only the top 20 words for example is printed
+        print(f"{sorted_dict[i][0]:<20}{sorted_dict[i][1]:>5}") #prints the word with the correct amount of spaces so it looks clean
 
-def topmost(dict, n):
-    sorted_list = sorted(dict.items(),key=lambda item:item[1],reverse=True) #converts the dict to a list of tuples and sorts it
-    for i in range(n):
-        print(f"{sorted_list[i][0]:<20} {sorted_list[i][1]:>20}")
+
+input_file = open(sys.argv[1], encoding="utf-8")
+lines = []
+for line in input_file.readlines():
+    lines += line
+
+stop_words_file = open(sys.argv[2], encoding="utf-8")
+stop_words = []
+for line in stop_words_file.readlines():
+    stop_words = line.split()
+
+def main():
+    printTopMost(wordfreq.countWords(wordfreq.tokenize(lines), stop_words), int(sys.argv[3]))
+
+main()
+
+input_file.close()
+stop_words_file.close()
