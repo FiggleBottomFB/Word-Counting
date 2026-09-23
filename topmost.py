@@ -9,20 +9,20 @@ def printTopMost(dict,n):
         print(f"{sorted_dict[i][0]:<20}{sorted_dict[i][1]:>5}") #prints the word with the correct amount of spaces so it looks clean
 
 
-input_file = open(sys.argv[1], encoding="utf-8")
+input_file = open(sys.argv[1], encoding="utf-8") #Takes the first argument in terminal for input_file
 lines = []
-for line in input_file.readlines():
+for line in input_file.readlines(): #Reads input_file and creates lines of words in lines list
     lines.append(line)
 
-stop_words_file = open(sys.argv[2], encoding="utf-8")
+stop_words_file = open(sys.argv[2], encoding="utf-8") #Takes the second argument in terminal for stop_words_file
 stop_words = []
-for line in stop_words_file.readlines():
+for line in stop_words_file.readlines(): #Read the stop_words_file a creates a list of stopwords
     stop_words += line.split()
 
-def main():
-    printTopMost(wordfreq.countWords(wordfreq.tokenize(lines), stop_words), int(sys.argv[3]))
+def main(): #Function for running the whole program
+    printTopMost(wordfreq.countWords(wordfreq.tokenize(lines), stop_words), int(sys.argv[3])) 
 
-main()
+main() #Runs Main
 
 input_file.close()
 stop_words_file.close()
