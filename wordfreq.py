@@ -65,41 +65,20 @@ def tokenize(lines):
 
     return words
 
-
-# f = open("lab1/eng_stopwords.txt")
-# stopwords =[]
-# for line in f.readlines():
-#             stopwords += line.split()
 def countWords(list, stopwords):
     dict = {}
     for word in list:
-        if word in dict.keys():
-            dict[word] +=1
-        elif word not in stopwords:
+        if word in dict.keys(): #checks if the word exists in the dictionary
+            dict[word] +=1 #adds 1 to the amount
+        elif word not in stopwords: #if it is new adds it with amount = 1
             dict[word] = 1
             
-    # print(dict)
     return dict
 
-
-# def topmost2(dict,n):
-#     sorted_dict = sorted(dict.items(),key=lambda item:item[1],reverse=True) 
-#     for i in range(n):
-#         #len1 = len(str(sorted_dict[i][0]))
-#         #len2 = len(str(sorted_dict[i][1]))
-#         #amount_of_spaces = 30-len1-len2
-#         #print(f'{sorted_dict[i][0]}{" "*amount_of_spaces}{sorted_dict[i][1]}')
-#         print(f"{sorted_dict[i][0]:<20}{sorted_dict[i][1]:>20}")
 
 def printTopMost(dict,n):
     if len(dict) < n:
         n = len(dict)
-    sorted_dict = sorted(dict.items(),key=lambda item:item[1],reverse=True) 
-    for i in range(n):
-        #len1 = len(str(sorted_dict[i][0]))
-        #len2 = len(str(sorted_dict[i][1]))
-        #amount_of_spaces = 30-len1-len2
-        #print(f'{sorted_dict[i][0]}{" "*amount_of_spaces}{sorted_dict[i][1]}')
-        print(f"{sorted_dict[i][0]:<20}{sorted_dict[i][1]:>5}")
-
-# topmost2(word_count(tokenize(testfile)), 20)
+    sorted_dict = sorted(dict.items(),key=lambda item:item[1],reverse=True) #converts the dict to a list of tuples and sorts it
+    for i in range(n): #makes it so only the top 20 words for example is printed
+        print(f"{sorted_dict[i][0]:<20}{sorted_dict[i][1]:>5}") #prints the word with the correct amount of spaces so it looks clean

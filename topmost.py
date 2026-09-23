@@ -16,6 +16,6 @@ def printTopMost(dict,n):
         print(f"{sorted_dict[i][0]:<20}{sorted_dict[i][1]:>20}")
 
 def topmost(dict, n):
-    sorted_list = sorted(dict.items(),key=lambda item:item[1],reverse=True)
+    sorted_list = sorted(dict.items(),key=lambda item:item[1],reverse=True) #converts the dict to a list of tuples and sorts it
     for i in range(n):
         print(f"{sorted_list[i][0]:<20} {sorted_list[i][1]:>20}")
