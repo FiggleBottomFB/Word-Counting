@@ -14,3 +14,8 @@ def printTopMost(dict,n):
         #amount_of_spaces = 30-len1-len2
         #print(f'{sorted_dict[i][0]}{" "*amount_of_spaces}{sorted_dict[i][1]}')
         print(f"{sorted_dict[i][0]:<20}{sorted_dict[i][1]:>20}")
+
+def topmost(dict, n):
+    sorted_list = sorted(dict.items(),key=lambda item:item[1],reverse=True)
+    for i in range(n):
+        print(f"{sorted_list[i][0]:<20} {sorted_list[i][1]:>20}")
