@@ -12,12 +12,12 @@ def printTopMost(dict,n):
 input_file = open(sys.argv[1], encoding="utf-8")
 lines = []
 for line in input_file.readlines():
-    lines += line
+    lines.append(line)
 
 stop_words_file = open(sys.argv[2], encoding="utf-8")
 stop_words = []
 for line in stop_words_file.readlines():
-    stop_words = line.split()
+    stop_words += line.split()
 
 def main():
     printTopMost(wordfreq.countWords(wordfreq.tokenize(lines), stop_words), int(sys.argv[3]))
