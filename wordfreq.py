@@ -1,105 +1,68 @@
-import sys
+# test = "test.txt"
+# testfile = "lab1/examples/article1.txt"
+# stopwords = "lab1/eng_stopwords.py"
 
-test = "test.txt"
-testfile = "lab1/examples/article1.txt"
-stopwords = "lab1/eng_stopwords.py"
+# # here the textfile is opened 
+# lines = []
+# with open(test, 'r', encoding='utf-8') as text_file:
+#     for line in text_file.readlines():
+#         # split the current line and add all elements to the words list
+#         lines.append(line)
 
-# here the textfile is opened 
-lines = []
-with open(test, 'r', encoding='utf-8') as text_file:
-    for line in text_file.readlines():
-        # split the current line and add all elements to the words list
-        lines.append(line)
-
-# print(lines)
 def tokenize(lines):
     words = []
     temp_words = []
+
+    # split all the lines where there is a whitespace
     for line in lines:
         words += line.split()
 
-    # here the textfile is opened 
-    # with open(testfile, 'r', encoding='utf-8') as text_file:
-    #     for line in text_file.readlines():
-    #         # split the current line and add all elements to the words list
-    #         words += line.split()
-
-    # a temporary variable used for splitting chars from digits
+    # a temporary variable used if numbers, chars and/or special chars is in the same word
     temp_word = ""
     temp_number = ""
 
     for word in words:
         for i in range(len(word)):
+            # if the current char is a letter, add that char to temp_word
+            # also check if there is a current temp_number, if there is then add temp_number to temp_words
             if word[i].isalpha():
                 if len(temp_number) > 0:
-                    temp_words.append(temp_number)
+                    temp_words.append(temp_number.lower())
                     temp_number = ""
                 temp_word = "".join((temp_word, word[i]))
+            # this if statement does the same thing as the previous one but checks for digits instead of letters
             if word[i].isdigit():
                 if len(temp_word) > 0:
-                    temp_words.append(temp_word)
+                    temp_words.append(temp_word.lower())
                     temp_word = ""
                 temp_number = "".join((temp_number, word[i]))
-            if not word[i].isalpha() and not word[i].isdigit():
 
+            # checks if the current char is a special char, if it is then add temp_word or temp_number to
+            # temp_words if one of them exists, and then add the special char to the temp_words list
+            if not word[i].isalpha() and not word[i].isdigit():
                 if len(temp_word) > 0:
-                    temp_words.append(temp_word)
+                    temp_words.append(temp_word.lower())
                     temp_word = ""
                 elif len(temp_number) > 0:
-                    temp_words.append(temp_number)
+                    temp_words.append(temp_number.lower())
                     temp_number = ""
              
                 temp_words.append(word[i])
 
+            # if this is the last char in the word, add the word to temp_words
             if i+1 == len(word):
                 if len(temp_word) > 0:
-                    temp_words.append(temp_word)
+                    temp_words.append(temp_word.lower())
                     temp_word = ""
                 if len(temp_number) > 0:
-                    temp_words.append(temp_number)
+                    temp_words.append(temp_number.lower())
                     temp_number = ""
-        # checks if the last char in the string is not a letter and not a digit
-        # if not word[-1].isalpha() and not word[-1].isdigit():
-        #     loops = 0
-        #     # loops through the last indexes in the word and checks for sepcial chars
-        #     for i in range(1, len(word) + 1):
-        #         # if last character is alpha or the whole word is a sequence of numbers, break the loop
-        #         if word[-i].isalpha() or temp_word.isdigit():
-        #             break
-        #         # otherwhise add the last char to a temporary list and increment counted number of loops
-        #         temp_words += word[-i]
-        #         loops += 1
-        #         # slice the word to remove the last char(s) in the string
-        #         temp_word = word[:-loops]
-        #     # replace the original word with the edited word and store it for the next step
-        #     words[words.index(word)] = temp_word
-        #     word = temp_word
 
-        # # does the same things as the previous if statement but checks for leading special chars in the newly edited word
-        # if word and not word[0].isalpha() and not word[0].isdigit(): 
-        #     loops = 0
-        #     for i in range(len(word)):
-        #         if word[i].isalpha() or temp_word.isdigit():
-        #             break
-        #         temp_words += word[i]
-        #         loops += 1
-        #         temp_word = word[loops:]
-        #     words[words.index(word)] = word[loops:]
-
-    # adds the special chars to word list and returns the complete list
+    # replaces the words list with the temp_words list
     words = temp_words
-    # print(words)
-    for i in range(len(words)):
-        words[i] = words[i].lower()
 
-    # print(words)
     return words
 
-
-tokenize(lines)
-# f = open("lab1/eng_stopwords.txt")
-# stopwords =[]
-# for line in f.readlines():
 
 def countWords(list, stopwords):
     dict = {}
