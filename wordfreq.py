@@ -95,14 +95,12 @@ def tokenize(lines):
     # print(words)
     return words
 
-<<<<<<< Updated upstream
-=======
+
 tokenize(lines)
 # f = open("lab1/eng_stopwords.txt")
 # stopwords =[]
 # for line in f.readlines():
-#             stopwords += line.split()
->>>>>>> Stashed changes
+
 def countWords(list, stopwords):
     dict = {}
     for word in list:
