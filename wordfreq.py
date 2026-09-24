@@ -1,14 +1,3 @@
-# test = "test.txt"
-# testfile = "lab1/examples/article1.txt"
-# stopwords = "lab1/eng_stopwords.py"
-
-# # here the textfile is opened 
-# lines = []
-# with open(test, 'r', encoding='utf-8') as text_file:
-#     for line in text_file.readlines():
-#         # split the current line and add all elements to the words list
-#         lines.append(line)
-
 def tokenize(lines):
     words = []
     temp_words = []
