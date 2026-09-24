@@ -60,9 +60,7 @@ def tokenize(lines):
 
     # replaces the words list with the temp_words list
     words = temp_words
-
     return words
-
 
 def countWords(list, stopwords):
     dict = {}
